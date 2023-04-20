@@ -1,0 +1,31 @@
+server:
+  port: 9090
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+
+spring:
+  data:
+    web:
+      pageable:
+        default-page-size: 5
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  application:
+    name: prospect-finder-business
+  datasource:
+    username: 'postgres'
+    url: jdbc:postgresql://localhost:5432/prospect_finder_services
+    password: 'TecPsql'
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: 'true'
+    show-sql: 'true'
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
