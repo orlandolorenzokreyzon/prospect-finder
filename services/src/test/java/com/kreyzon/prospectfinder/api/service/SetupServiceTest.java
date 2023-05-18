@@ -32,10 +32,10 @@ class SetupServiceTest {
     @Test
     void testGetSetup() {
         Setup setup = new Setup();
-        setup.setAvailableCredits(1);
+        setup.setBusinessAvailableCredits(1);
         setup.setId(1);
-        setup.setPassword("iloveyou");
-        setup.setUsername("janedoe");
+        setup.setBusinessPassword("iloveyou");
+        setup.setBusinessUsername("janedoe");
 
         ArrayList<Setup> setupList = new ArrayList<>();
         setupList.add(setup);

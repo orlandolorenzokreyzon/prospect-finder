@@ -1,5 +1,6 @@
 package com.kreyzon.prospectfinder.common.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kreyzon.prospectfinder.common.Constant;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class GenericResponse {
         this.message = message;
     }
 
+    @JsonIgnore
     public Boolean isResultNOK() {
         if (this.getResult().equals(Constant.RESULT_NOK))
             return true;

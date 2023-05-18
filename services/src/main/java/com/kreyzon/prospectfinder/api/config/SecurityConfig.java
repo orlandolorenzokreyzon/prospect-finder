@@ -1,9 +1,8 @@
-package com.kreyzon.prospectfinder.auth.config;
+package com.kreyzon.prospectfinder.api.config;
 
-import com.kreyzon.prospectfinder.auth.jwt.JwtRequestFilter;
-import lombok.RequiredArgsConstructor;
+import com.kreyzon.prospectfinder.api.filter.EndpointFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,10 +15,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final JwtRequestFilter jwtRequestFilter;
+    @Autowired
+    EndpointFilter endpointFilter;
 
     private static final String[] AUTH_WHITELIST = {
             // -- Swagger UI v2
@@ -34,9 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             // other public endpoints of your API may be appended to this array
-            "/prospectfinder/api/v1/auth/user",
-            "/prospectfinder/api/v1/auth/login",
-            "/prospectfinder/api/v1/auth/login/validate-token"
     };
 
     @Override
@@ -57,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterAfter(endpointFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -70,11 +65,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 }

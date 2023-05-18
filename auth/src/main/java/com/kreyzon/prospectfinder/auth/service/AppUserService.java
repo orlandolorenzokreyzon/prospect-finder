@@ -66,7 +66,7 @@ public class AppUserService implements UserDetailsService {
                 .findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Id not found"));
 
-        AppUserDto appUserDto = new AppUserDto(appUser.getEmail());
+        AppUserDto appUserDto = new AppUserDto(appUser.getUserId(), appUser.getEmail(), null);
 
         return new GenericResponse(Constant.RESULT_OK, "User found", appUserDto);
     }

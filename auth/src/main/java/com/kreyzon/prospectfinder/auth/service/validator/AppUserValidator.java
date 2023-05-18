@@ -1,6 +1,7 @@
 package com.kreyzon.prospectfinder.auth.service.validator;
 
 import com.kreyzon.prospectfinder.auth.model.AppUser;
+import com.kreyzon.prospectfinder.auth.repository.AppUserRepository;
 import com.kreyzon.prospectfinder.common.Constant;
 import com.kreyzon.prospectfinder.common.request.PasswordUpdateRequest;
 import com.kreyzon.prospectfinder.common.request.UserCreateRequest;
@@ -12,13 +13,19 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class AppUserValidator {
-
+    private final AppUserRepository appUserRepository;
     private final PasswordEncoder passwordEncoder;
 
     public GenericResponse validateUserCreation(UserCreateRequest userCreateRequest) {
+        Optional<AppUser> appUserOptional = appUserRepository.findByEmail(userCreateRequest.email());
+        if (appUserOptional.isPresent())
+            return new GenericResponse(Constant.RESULT_NOK, "Email is already registered to the system");
+
         if (!userCreateRequest.password().equals(userCreateRequest.confirmPassword()))
             return new GenericResponse(Constant.RESULT_NOK, "Passwords do not match");
 

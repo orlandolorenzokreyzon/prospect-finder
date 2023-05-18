@@ -9,13 +9,13 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "session")
+@Table(name = "business_session")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Session {
+public class BusinessSession {
     @Id
     @Column(name = "session_id")
     private Integer id;

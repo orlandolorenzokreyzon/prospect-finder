@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SessionResponse {
+public class BusinessSessionResponse {
     private String id;
     private String name;
     private String scrape_info;

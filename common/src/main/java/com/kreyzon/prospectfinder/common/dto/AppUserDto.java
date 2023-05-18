@@ -1,5 +1,6 @@
 package com.kreyzon.prospectfinder.common.dto;
 
 
-public record AppUserDto(String email) {
+public record AppUserDto(Integer id, String email, String token) {
+
 }

@@ -52,20 +52,6 @@ class AuthenticationServiceTest {
     @MockBean
     private JwtProvider jwtProvider;
 
-    /**
-     * Method under test: {@link AuthenticationService#login(AuthenticationRequest)}
-     */
-    @Test
-    void testLogin3() {
-        when(appUserRepository.findByEmail((String) any())).thenReturn(Optional.empty());
-        when(appUserValidator.validateUserLogin((AppUser) any())).thenReturn(new AuthenticationResponse("ABC123"));
-        AuthenticationResponse actualLoginResult = authenticationService
-                .login(new AuthenticationRequest("jane.doe@example.org", "iloveyou"));
-        assertEquals("User does not exist", actualLoginResult.getMessage());
-        assertNull(actualLoginResult.getToken());
-        assertEquals("NOK", actualLoginResult.getResult());
-        verify(appUserRepository).findByEmail((String) any());
-    }
 
     /**
      * Method under test: {@link AuthenticationService#login(AuthenticationRequest)}

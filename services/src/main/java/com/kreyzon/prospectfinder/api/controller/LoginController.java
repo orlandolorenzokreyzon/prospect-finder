@@ -1,6 +1,6 @@
 package com.kreyzon.prospectfinder.api.controller;
 
-import com.kreyzon.prospectfinder.api.service.LoginService;
+import com.kreyzon.prospectfinder.api.service.BusinessLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/prospectfinder/api/v1/business/login")
 public class LoginController {
     @Autowired
-    private LoginService loginService;
+    private BusinessLoginService businessLoginService;
 
     @PostMapping
     public ResponseEntity<String> login() {
-        return ResponseEntity.ok(loginService.login());
+        return ResponseEntity.ok(businessLoginService.login());
     }
 }

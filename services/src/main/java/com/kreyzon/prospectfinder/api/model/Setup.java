@@ -19,9 +19,9 @@ public class Setup {
     @Id
     private Integer id;
 
-    private String username;
+    private String businessUsername;
 
-    private String password;
+    private String businessPassword;
 
-    private Integer availableCredits;
+    private Integer businessAvailableCredits;
 }

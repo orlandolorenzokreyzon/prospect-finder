@@ -1,5 +1,6 @@
 package com.kreyzon.prospectfinder.auth.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ public class AppUser {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private LocalDateTime creationDate;

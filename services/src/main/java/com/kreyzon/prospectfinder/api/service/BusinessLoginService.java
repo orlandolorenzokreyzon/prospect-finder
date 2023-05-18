@@ -1,8 +1,8 @@
 package com.kreyzon.prospectfinder.api.service;
 
 import com.kreyzon.prospectfinder.api.model.Setup;
-import com.kreyzon.prospectfinder.api.request.LoginRequest;
-import com.kreyzon.prospectfinder.api.response.LoginResponse;
+import com.kreyzon.prospectfinder.api.request.BusinessLoginRequest;
+import com.kreyzon.prospectfinder.api.response.BusinessLoginResponse;
 import com.kreyzon.prospectfinder.common.Constant;
 import com.kreyzon.prospectfinder.common.HttpUtils;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class BusinessLoginService {
     private final SetupService setupService;
 
     private final EndpointService endpointService;
@@ -30,17 +30,17 @@ public class LoginService {
 
         HttpHeaders httpHeaders = HttpUtils.generateHttpHeaders("");
 
-        LoginRequest loginRequest = new LoginRequest(setup.getUsername(), setup.getPassword());
+        BusinessLoginRequest businessLoginRequest = new BusinessLoginRequest(setup.getBusinessUsername(), setup.getBusinessPassword());
 
-        HttpEntity<LoginRequest> requestHttpEntity = new HttpEntity<LoginRequest>(loginRequest, httpHeaders);
+        HttpEntity<BusinessLoginRequest> requestHttpEntity = new HttpEntity<BusinessLoginRequest>(businessLoginRequest, httpHeaders);
 
-        ResponseEntity<LoginResponse> response = null;
+        ResponseEntity<BusinessLoginResponse> response = null;
         try {
             response = restTemplate
                     .postForEntity(
                             endpointService.findById(Constant.X_EMAIL_AUTH_TOKEN_EP).getFullUrl(),
                             requestHttpEntity,
-                            LoginResponse.class
+                            BusinessLoginResponse.class
                     );
         } catch (Exception ex) {
             ex.printStackTrace();

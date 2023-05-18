@@ -17,14 +17,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-@ContextConfiguration(classes = {LoginService.class})
+@ContextConfiguration(classes = {BusinessLoginService.class})
 @ExtendWith(SpringExtension.class)
-class LoginServiceTest {
+class BusinessLoginServiceTest {
     @MockBean
     private EndpointService endpointService;
 
     @Autowired
-    private LoginService loginService;
+    private BusinessLoginService businessLoginService;
 
     @MockBean
     private RestTemplate restTemplate;
@@ -33,16 +33,16 @@ class LoginServiceTest {
     private SetupService setupService;
 
     /**
-     * Method under test: {@link LoginService#login()}
+     * Method under test: {@link BusinessLoginService#login()}
      */
     @Test
     @Disabled("TODO: Complete this test")
     void testLogin() throws RestClientException {
         Setup setup = new Setup();
-        setup.setAvailableCredits(1);
+        setup.setBusinessAvailableCredits(1);
         setup.setId(1);
-        setup.setPassword("Password123!");
-        setup.setUsername("lorenzo.orlando724@gmail.com");
+        setup.setBusinessPassword("iloveyou");
+        setup.setBusinessUsername("janedoe");
         when(setupService.getSetup()).thenReturn(setup);
 
         Endpoint endpoint = new Endpoint();
@@ -52,7 +52,7 @@ class LoginServiceTest {
         when(endpointService.findById((String) any())).thenReturn(endpoint);
         when(restTemplate.postForEntity((String) any(), (Object) any(), (Class<Object>) any(), (Object[]) any()))
                 .thenReturn(new ResponseEntity<>(HttpStatus.CONTINUE));
-        loginService.login();
+        businessLoginService.login();
     }
 }
 
