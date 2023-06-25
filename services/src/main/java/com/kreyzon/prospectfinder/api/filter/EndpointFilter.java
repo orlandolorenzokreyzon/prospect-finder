@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Component
 public class EndpointFilter extends GenericFilterBean  {
     @Autowired

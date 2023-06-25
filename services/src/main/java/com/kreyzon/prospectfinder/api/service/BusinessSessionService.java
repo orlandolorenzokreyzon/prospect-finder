@@ -9,14 +9,11 @@ import com.kreyzon.prospectfinder.common.Constant;
 import com.kreyzon.prospectfinder.common.HttpUtils;
 import com.kreyzon.prospectfinder.common.response.GenericResponse;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.description.type.TypeList;
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.asn1.gnu.GNUObjectIdentifiers;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
